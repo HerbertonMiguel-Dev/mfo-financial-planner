@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    /* File Layout */
+    "outDir": "./dist",
+    "rootDir": "./src",
+
+    /* Environment Settings */
+    "target": "es2022",
+    "module": "commonjs", // Mude para commonjs para compatibilidade com o Node.js
+    "lib": ["es2022"], // Inclui as bibliotecas padrão do ES2022
+    "types": ["node", "jest"], // Adicione 'node' e 'jest' para os tipos corretos
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    
+    /* Stricter Typechecking Options */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Outras opções */
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+  },
+  "include": ["src/**/*"], // Inclui todos os arquivos TypeScript na pasta src
+  "exclude": ["node_modules", "dist", "**/*.test.ts"] // Exclui arquivos de teste da compilação de produção
+}

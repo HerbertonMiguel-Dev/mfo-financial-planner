@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelos de Dados
+// ----------------------------------------------------
+
+// 1. Clientes
+model Client {
+  id              String @id @default(uuid())
+  name            String
+  email           String @unique
+  age             Int
+  status          String // 'active' | 'inactive'
+  familyProfile   Json?  // Permite um objeto JSON opcional
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  goals           Goal[]
+  wallets         Wallet[]
+  events          Event[]
+  simulations     Simulation[]
+  insuranceProfiles InsuranceProfile[]
+}
+
+// 2. Planejamento & Alinhamento
+model Goal {
+  id          String @id @default(uuid())
+  description String
+  targetValue Decimal
+  targetDate  DateTime
+  clientId    String
+  client      Client @relation(fields: [clientId], references: [id])
+}
+
+model Wallet {
+  id            String @id @default(uuid())
+  totalWealth   Decimal // Patrimônio total
+  classes       Json    // Classes e percentuais (ex: { "Ações": 50, "Renda Fixa": 50 })
+  clientId      String
+  client        Client @relation(fields: [clientId], references: [id])
+}
+
+// 3. Projeção Patrimonial
+model Simulation {
+  id              String @id @default(uuid())
+  simulationName  String
+  initialState    Json    // snapshot do patrimônio inicial
+  projectionCurve Json    // Array de { year, projectedValue }
+  rate            Decimal // Taxa real composta utilizada
+  createdAt       DateTime @default(now())
+  clientId        String
+  client          Client @relation(fields: [clientId], references: [id])
+}
+
+// 4. Movimentações
+model Event {
+  id          String @id @default(uuid())
+  type        String // 'contribution' | 'withdrawal'
+  value       Decimal
+  frequency   String // 'once' | 'monthly' | 'yearly'
+  date        DateTime // A data em que a movimentação acontece ou começa
+  clientId    String
+  client      Client @relation(fields: [clientId], references: [id])
+}
+
+// 5. Histórico de Simulações
+// Já contemplado no modelo `Simulation` acima
+
+// 6. Perfis de Seguro
+model InsuranceProfile {
+  id          String @id @default(uuid())
+  type        String // 'life' | 'disability'
+  coverage    Decimal
+  premium     Decimal
+  clientId    String
+  client      Client @relation(fields: [clientId], references: [id])
+}
