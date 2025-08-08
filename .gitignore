@@ -1,0 +1,65 @@
+# Node.js
+# ========================
+# Node_modules
+# Diretório de dependências de pacotes
+node_modules/
+
+# Logs
+# Arquivos de log gerados pelo servidor
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Variáveis de Ambiente
+# Arquivos que contêm segredos e configurações sensíveis
+# NUNCA comitar arquivos .env, .env.local, .env.development, etc.
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+
+# Build e Compilação
+# Diretórios e arquivos gerados pelo processo de build
+# Como o seu projeto é TypeScript, a pasta 'dist' é o diretório de saída
+dist/
+build/
+coverage/
+
+# IDEs e Editores
+# Arquivos de configuração específicos de editores (pode variar)
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Banco de Dados
+# Arquivos de banco de dados locais
+*.sqlite
+*.sqlite3
+db.sqlite3
+
+# Cache e Outros
+# Cache de pacotes, arquivos temporários
+.nyc_output/
+.cache/
+.eslintcache
+.prettierignore
+
+# Arquivos do Prisma
+# Cliente gerado e arquivos de migração que não devem ser versionados diretamente
+# As migrações devem ser aplicadas no ambiente, não versionadas no código
+.prisma/
+prisma/migrations/
+
+# Docker
+# O seu .env está no nível raiz, mas o Dockerfile no subdiretório
+# Certifique-se de que os arquivos .env não sejam copiados para o container
+# se você os estiver gerenciando com variáveis de ambiente no docker-compose.
+.dockerignore
+
+# Arquivos de Teste
+# Relatórios de cobertura de testes
+coverage/
